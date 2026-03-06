@@ -105,6 +105,23 @@
             }
         }
 
+        .tap-hint {
+            display: block;
+            margin-top: 0.8rem;
+            font-size: 0.95rem;
+            color: rgba(255, 255, 255, 0.9);
+            font-family: 'Cairo', 'Reem Kufi', sans-serif;
+            animation: tapPulse 2s ease-in-out infinite;
+            letter-spacing: 0.5px;
+        }
+        .tap-hint.hidden {
+            display: none !important;
+        }
+        @keyframes tapPulse {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.02); }
+        }
+
         .message {
             font-family: 'Reem Kufi', 'Cairo', cursive, sans-serif;
             font-size: 2.2rem;
@@ -390,6 +407,10 @@
             .message {
                 font-size: 1.8rem;
             }
+            .tap-hint {
+                font-size: 0.85rem;
+                margin-top: 0.6rem;
+            }
             
             .gif-container {
                 height: 180px;
@@ -419,6 +440,10 @@
             
             .message {
                 font-size: 1.4rem;
+            }
+            .tap-hint {
+                font-size: 0.8rem;
+                margin-top: 0.5rem;
             }
 
             .glass-container {
@@ -520,6 +545,7 @@
         <div class="birthday-crown">👑</div>
         <div class="message-container">
             <p class="message" id="initialMessage">✨ لدي شيء مميز لك ✨</p>
+            <span class="tap-hint" id="tapHint">👆 اضغط للتكشف</span>
             <p class="message hidden" id="secondMessage">✨ ميلادك في الشهر هذا ✨</p>
             <p class="message hidden" id="dateDisplay" style="font-size: 1.3rem; margin-top: 0.5rem;">📅 16-03</p>
         </div>
@@ -637,6 +663,8 @@
                     ease: "back.out(1.7)",
                     onComplete: () => {
                         initialMessage.classList.add('hidden');
+                        const tapHint = document.getElementById('tapHint');
+                        if (tapHint) tapHint.classList.add('hidden');
                         secondMessage.classList.remove('hidden');
                         const dateDisplay = document.getElementById('dateDisplay');
                         if (dateDisplay) dateDisplay.classList.remove('hidden');
